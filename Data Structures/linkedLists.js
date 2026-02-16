@@ -51,6 +51,71 @@ class LinkedList {
     }
     return this.tail.value;
   }
+
+  at(index) {
+    let count = 0;
+    let current = this.head;
+
+    while (current !== null) {
+      if (count === index) {
+        return current.value;
+      }
+      count += 1;
+      current = current.nextNode;
+    }
+  }
+
+  pop() {
+    if (this.head === null) {
+      return undefined;
+    }
+    if (this.head.nextNode === null) {
+      this.tail = null;
+    }
+    const popped = this.head.value;
+    this.head = this.head.nextNode;
+    return popped;
+  }
+
+  contains(value) {
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.value === value) {
+        return true;
+      }
+      current = current.nextNode;
+    }
+    return false;
+  }
+
+  findIndex(value) {
+    let count = 0;
+    let current = this.head;
+
+    while (current !== null) {
+      if (current.value === value) {
+        return count;
+      }
+      count += 1;
+      current = current.nextNode;
+    }
+    return -1;
+  }
+
+  toString() {
+    let current = this.head;
+    let list = "";
+
+    if (this.head === null) return "";
+
+    while (current !== null) {
+      list += `( ${current.value} ) -> `;
+      current = current.nextNode;
+    }
+
+    return list + "null";
+  }
 }
 
 class Node {
