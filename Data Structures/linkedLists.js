@@ -146,6 +146,42 @@ class LinkedList {
       current = current.nextNode;
     }
   }
+
+  removeAt(index) {
+    if (index < 0 || index >= this.size()) {
+      throw new RangeError("Index out of bounds");
+    }
+
+    if (index === 0) {
+      const removed = this.head.value;
+      this.head = this.head.nextNode;
+
+      if (this.head === null) {
+        this.tail = null;
+      }
+
+      return removed;
+    }
+
+    let count = 0;
+    let previous = this.head;
+
+    while (current !== null) {
+      if (count === index - 1) {
+        const toDelete = previous.nextNode;
+
+        if (toDelete.nextNode === null) {
+          this.tail = previous;
+        }
+
+        previous.nextNode = toDelete.nextNode;
+        toDelete.nextNode = null;
+        return toDelete.value;
+      }
+      count += 1;
+      previous = previous.nextNode;
+    }
+  }
 }
 
 class Node {
