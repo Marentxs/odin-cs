@@ -121,4 +121,32 @@ class hashMap {
     }
     return keys;
   }
+
+  values() {
+    const buckets = this.buckets;
+    const values = [];
+
+    for (let i = 0; i < buckets.length; i++) {
+      if (buckets[i]) {
+        for (let j = 0; j < buckets[i].length; j++) {
+          values.push(buckets[i][j][1]);
+        }
+      }
+    }
+    return values;
+  }
+
+  entries() {
+    const buckets = this.buckets;
+    const entries = [];
+
+    for (let i = 0; i < buckets.length; i++) {
+      if (buckets[i]) {
+        for (let j = 0; j < buckets[i].length; j++) {
+          entries.push(buckets[i][j]);
+        }
+      }
+    }
+    return entries;
+  }
 }
