@@ -107,4 +107,18 @@ class hashMap {
     this.buckets = new Array(this.capacity);
     this.size = 0;
   }
+
+  keys() {
+    const buckets = this.buckets;
+    const keys = [];
+
+    for (let i = 0; i < buckets.length; i++) {
+      if (buckets[i]) {
+        for (let j = 0; j < buckets[i].length; j++) {
+          keys.push(buckets[i][j][0]);
+        }
+      }
+    }
+    return keys;
+  }
 }
