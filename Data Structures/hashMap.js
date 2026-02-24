@@ -45,6 +45,10 @@ class hashMap {
     const index = this.hash(key);
     const bucket = this.buckets[index];
 
+    if (!bucket) {
+      return null;
+    }
+
     for (let i = 0; i < bucket.length; i++) {
       const [existingKey, existingValue] = bucket[i];
 
