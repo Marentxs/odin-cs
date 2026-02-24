@@ -3,6 +3,7 @@ class hashMap {
     this.loadFactor = 0.75;
     this.capacity = 16;
     this.buckets = new Array(this.capacity);
+    this.size = 0;
   }
 
   hash(key) {
@@ -39,6 +40,7 @@ class hashMap {
 
     // Key doesn't exist, push it
     bucket.push([key, value]);
+    this.size++;
   }
 
   get(key) {
@@ -90,9 +92,14 @@ class hashMap {
 
       if (existingKey === key) {
         bucket.splice(i, 1);
+        this.size--;
         return true;
       }
     }
     return false;
+  }
+
+  length() {
+    return this.size;
   }
 }
