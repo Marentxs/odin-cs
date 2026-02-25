@@ -18,7 +18,7 @@ class hashMap {
     return hashCode;
   }
 
-  set(key, value) {
+  insert(key, value) {
     const index = this.hash(key);
 
     // If empty, build bucket
@@ -34,13 +34,37 @@ class hashMap {
 
       if (existingKey === key) {
         bucket[i] = [key, value]; // Key exists, replace entry
-        return;
+        return false;
       }
     }
 
     // Key doesn't exist, push it
     bucket.push([key, value]);
-    this.size++;
+    return true;
+  }
+
+  set(key, value) {
+    const isNew = this.insert(key, value);
+
+    if (isNew) {
+      this.size++;
+
+      if (this.size / this.capacity > this.loadFactor) {
+        this.grow();
+      }
+    }
+  }
+
+  grow() {
+    const entries = this.entries();
+    this.capacity = this.capacity * 2;
+    this.buckets = new Array(this.capacity);
+    this.size = 0;
+
+    for (const [key, value] of entries) {
+      this.insert(key, value);
+      this.size++;
+    }
   }
 
   get(key) {
