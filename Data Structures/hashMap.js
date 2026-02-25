@@ -133,13 +133,13 @@ class hashMap {
   }
 
   keys() {
-    const buckets = this.buckets;
     const keys = [];
 
-    for (let i = 0; i < buckets.length; i++) {
-      if (buckets[i]) {
-        for (let j = 0; j < buckets[i].length; j++) {
-          keys.push(buckets[i][j][0]);
+    for (const bucket of this.buckets) {
+      if (bucket) {
+        for (const entry of bucket) {
+          const [key, value] = entry;
+          keys.push(key);
         }
       }
     }
@@ -147,13 +147,13 @@ class hashMap {
   }
 
   values() {
-    const buckets = this.buckets;
     const values = [];
 
-    for (let i = 0; i < buckets.length; i++) {
-      if (buckets[i]) {
-        for (let j = 0; j < buckets[i].length; j++) {
-          values.push(buckets[i][j][1]);
+    for (const bucket of this.buckets) {
+      if (bucket) {
+        for (const entry of bucket) {
+          const [key, value] = entry;
+          values.push(value);
         }
       }
     }
@@ -161,13 +161,12 @@ class hashMap {
   }
 
   entries() {
-    const buckets = this.buckets;
     const entries = [];
 
-    for (let i = 0; i < buckets.length; i++) {
-      if (buckets[i]) {
-        for (let j = 0; j < buckets[i].length; j++) {
-          entries.push(buckets[i][j]);
+    for (const bucket of this.buckets) {
+      if (bucket) {
+        for (const entry of bucket) {
+          entries.push(entry);
         }
       }
     }
