@@ -32,4 +32,23 @@ class Tree {
 
     return this.#recursiveBST(newArr, 0, newArr.length - 1);
   }
+
+  includes(value) {
+    return this.#includesRecursive(this.root, value);
+  }
+
+  #includesRecursive(node, value) {
+    if (node === null) {
+      return false;
+    }
+    if (value === node.data) {
+      return true;
+    }
+
+    if (value < node.data) {
+      return this.#includesRecursive(node.left, value);
+    } else if (value > node.data) {
+      return this.#includesRecursive(node.right, value);
+    }
+  }
 }
