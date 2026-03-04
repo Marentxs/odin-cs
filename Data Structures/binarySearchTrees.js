@@ -33,10 +33,6 @@ class Tree {
     return this.#recursiveBST(newArr, 0, newArr.length - 1);
   }
 
-  includes(value) {
-    return this.#includesRecursive(this.root, value);
-  }
-
   #includesRecursive(node, value) {
     if (node === null) {
       return false;
@@ -50,5 +46,29 @@ class Tree {
     } else if (value > node.data) {
       return this.#includesRecursive(node.right, value);
     }
+  }
+
+  includes(value) {
+    return this.#includesRecursive(this.root, value);
+  }
+
+  #insertRecursive(node, value) {
+    if (node === null) {
+      return new Node(value);
+    }
+
+    if (value < node.data) {
+      node.left = this.#insertRecursive(node.left, value);
+    } else if (value > node.data) {
+      node.right = this.#insertRecursive(node.right, value);
+    } else if (value === node.data) {
+      return node;
+    }
+
+    return node;
+  }
+
+  insert(value) {
+    this.root = this.#insertRecursive(this.root, value);
   }
 }
