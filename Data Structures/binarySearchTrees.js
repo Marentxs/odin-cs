@@ -71,4 +71,36 @@ class Tree {
   insert(value) {
     this.root = this.#insertRecursive(this.root, value);
   }
+
+  #findNode(node, value) {
+    if (node === null) {
+      return null;
+    }
+    if (value === node.data) {
+      return node;
+    }
+
+    if (value < node.data) {
+      return this.#findNode(node.left, value);
+    } else if (value > node.data) {
+      return this.#findNode(node.right, value);
+    }
+  }
+
+  #calculateHeight(node) {
+    if (node === null) {
+      return -1;
+    }
+    const left = this.#calculateHeight(node.left);
+    const right = this.#calculateHeight(node.right);
+    const max = Math.max(left, right);
+
+    return 1 + max;
+  }
+
+  height(value) {
+    const target = this.#findNode(this.root, value);
+    if (target === null) return undefined;
+    return this.#calculateHeight(target);
+  }
 }
