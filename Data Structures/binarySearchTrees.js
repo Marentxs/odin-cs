@@ -103,4 +103,25 @@ class Tree {
     if (target === null) return undefined;
     return this.#calculateHeight(target);
   }
+
+  #depthRecursive(node, value, currentDepth) {
+    if (node === null) {
+      return undefined;
+    }
+    if (value === node.data) {
+      return currentDepth;
+    }
+
+    if (value < node.data) {
+      currentDepth += 1;
+      return this.#depthRecursive(node.left, value, currentDepth);
+    } else if (value > node.data) {
+      currentDepth += 1;
+      return this.#depthRecursive(node.right, value, currentDepth);
+    }
+  }
+
+  depth(value) {
+    return this.#depthRecursive(this.root, value, 0);
+  }
 }
