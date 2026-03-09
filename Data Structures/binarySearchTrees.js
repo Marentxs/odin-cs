@@ -124,4 +124,23 @@ class Tree {
   depth(value) {
     return this.#depthRecursive(this.root, value, 0);
   }
+
+  levelOrderForEach(callback) {
+    if (typeof callback !== "function") throw new Error("Callback is required");
+
+    const queue = [this.root];
+
+    if (this.root === null) {
+      return;
+    }
+
+    while (queue.length !== 0) {
+      const node = queue.shift();
+
+      callback(node.data);
+
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+  }
 }
