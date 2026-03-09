@@ -143,4 +143,20 @@ class Tree {
       if (node.right) queue.push(node.right);
     }
   }
+
+  #inOrderRecursive(node, callback) {
+    if (node === null) {
+      return;
+    }
+
+    this.#inOrderRecursive(node.left, callback);
+    callback(node.data);
+    this.#inOrderRecursive(node.right, callback);
+  }
+
+  inOrderForEach(callback) {
+    if (typeof callback !== "function") throw new Error("Callback is required");
+
+    return this.#inOrderRecursive(this.root, callback);
+  }
 }
