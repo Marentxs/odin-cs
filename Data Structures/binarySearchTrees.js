@@ -159,4 +159,20 @@ class Tree {
 
     return this.#inOrderRecursive(this.root, callback);
   }
+
+  #postOrderRecursive(node, callback) {
+    if (node === null) {
+      return;
+    }
+
+    this.#postOrderRecursive(node.left, callback);
+    this.#postOrderRecursive(node.right, callback);
+    callback(node.data);
+  }
+
+  postOrderForEach(callback) {
+    if (typeof callback !== "function") throw new Error("Callback is required");
+
+    return this.#postOrderRecursive(this.root, callback);
+  }
 }
