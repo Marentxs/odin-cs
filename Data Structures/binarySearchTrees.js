@@ -144,6 +144,22 @@ class Tree {
     }
   }
 
+  #preOrderRecursive(node, callback) {
+    if (node === null) {
+      return;
+    }
+
+    callback(node.data);
+    this.#preOrderRecursive(node.left, callback);
+    this.#preOrderRecursive(node.right, callback);
+  }
+
+  preOrderForEach(callback) {
+    if (typeof callback !== "function") throw new Error("Callback is required");
+
+    return this.#preOrderRecursive(this.root, callback);
+  }
+
   #inOrderRecursive(node, callback) {
     if (node === null) {
       return;
