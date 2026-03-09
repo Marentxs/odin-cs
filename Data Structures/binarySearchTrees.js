@@ -213,5 +213,14 @@ class Tree {
     return result.balanced;
   }
 
-  rebalance() {}
+  rebalance() {
+    if (this.isBalanced()) {
+      return;
+    }
+
+    const values = [];
+    this.inOrderForEach((value) => values.push(value));
+
+    this.root = this.buildTree(values);
+  }
 }
