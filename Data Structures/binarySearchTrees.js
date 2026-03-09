@@ -194,12 +194,12 @@ class Tree {
 
   #checkBalance(node) {
     if (node === null) {
-      return -1;
+      return { height: -1, balanced: true };
     }
     const left = this.#checkBalance(node.left);
     const right = this.#checkBalance(node.right);
 
-    const height = 1 + Math.max(left, right);
+    const height = 1 + Math.max(left.height, right.height);
     const childBalanced = left.balanced && right.balanced;
     const ownBalanced = Math.abs(left.height - right.height) <= 1;
 
@@ -222,5 +222,15 @@ class Tree {
     this.inOrderForEach((value) => values.push(value));
 
     this.root = this.buildTree(values);
+  }
+
+  prettyPrint(node = this.root, prefix = "", isLeft = true) {
+    if (node === null || node === undefined) {
+      return;
+    }
+
+    this.prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 }
