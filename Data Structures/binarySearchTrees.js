@@ -191,4 +191,27 @@ class Tree {
 
     return this.#postOrderRecursive(this.root, callback);
   }
+
+  #checkBalance(node) {
+    if (node === null) {
+      return -1;
+    }
+    const left = this.#checkBalance(node.left);
+    const right = this.#checkBalance(node.right);
+
+    const height = 1 + Math.max(left, right);
+    const childBalanced = left.balanced && right.balanced;
+    const ownBalanced = Math.abs(left.height - right.height) <= 1;
+
+    const balanced = childBalanced && ownBalanced;
+
+    return { height, balanced };
+  }
+
+  isBalanced() {
+    const result = this.#checkBalance(this.root);
+    return result.balanced;
+  }
+
+  rebalance() {}
 }
